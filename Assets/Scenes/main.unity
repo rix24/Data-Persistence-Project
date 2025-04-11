@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.30692244, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -387,6 +387,7 @@ GameObject:
   - component: {fileID: 188020405}
   - component: {fileID: 188020407}
   - component: {fileID: 188020406}
+  - component: {fileID: 188020408}
   m_Layer: 5
   m_Name: ScoreText
   m_TagString: Untagged
@@ -455,6 +456,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 188020404}
   m_CullTransparentMesh: 1
+--- !u!114 &188020408
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 188020404}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 293fc4ca738cc7e428ee734bcff8c1c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &450625940
 GameObject:
   m_ObjectHideFlags: 0
@@ -641,7 +654,10 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: 'GAME OVER
 
-    Press Space to Restart'
+    Press Space to Restart
+
+    Press Esc to return to the
+    main menu'
 --- !u!222 &474497241
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1297,6 +1313,7 @@ GameObject:
   - component: {fileID: 2078529055}
   - component: {fileID: 2078529057}
   - component: {fileID: 2078529056}
+  - component: {fileID: 2078529058}
   m_Layer: 5
   m_Name: ScoreText (1)
   m_TagString: Untagged
@@ -1365,6 +1382,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2078529054}
   m_CullTransparentMesh: 1
+--- !u!114 &2078529058
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2078529054}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b626522c29fbbc4983c888d125dbb4c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  highScoreText: {fileID: 0}
 --- !u!1 &2137539494
 GameObject:
   m_ObjectHideFlags: 0

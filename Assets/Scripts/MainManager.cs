@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -59,18 +60,64 @@ public class MainManager : MonoBehaviour
             {
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
             }
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                SceneManager.LoadScene(0);
+            }
         }
     }
 
     void AddPoint(int point)
     {
         m_Points += point;
-        ScoreText.text = $"Score : {m_Points}";
+        ScoreText.text = $"Score : {m_Points} : {GameManager.Instance.playerName}";
     }
 
     public void GameOver()
     {
         m_GameOver = true;
         GameOverText.SetActive(true);
+        if (GameManager.Instance.highScores.Count == 0)
+        {
+            GameManager.Instance.highScores.Add(new HighScoreData(m_Points, GameManager.Instance.playerName));
+        }
+        else if (GameManager.Instance.highScores.Count < 10)
+        {
+            GameManager.Instance.highScores.Add(new HighScoreData(m_Points, GameManager.Instance.playerName));
+            GameManager.Instance.highScores = GameManager.Instance.highScores.OrderByDescending(x => x.score).ToList();
+        }
+        else if (GameManager.Instance.highScores.Count == 10)
+        {
+            for (var i = 0; i < 10; i++)
+            {
+                Debug.Log("Loop: " + i);
+                if (m_Points > GameManager.Instance.highScores[0].score)
+                {
+                    ShiftHighScoresDown(i, m_Points, GameManager.Instance.playerName);
+                    break;
+                }
+                i++;
+            }
+        }
+        GameManager.Instance.SaveData();
+    }
+
+    private void ShiftHighScoresDown(int startIndex, int newHighScore, string newHighScoreName)
+    {
+        // Start from the last index and shift each item down by one position
+        for (int i = GameManager.Instance.highScores.Count - 1; i > startIndex; i--)
+        {
+            GameManager.Instance.highScores[i] = GameManager.Instance.highScores[i - 1];
+        }
+
+        // Insert the new high score at the specified index
+        GameManager.Instance.highScores[startIndex] = new HighScoreData(newHighScore, newHighScoreName);
+        Debug.Log(GameManager.Instance.highScores[startIndex].score + " " + GameManager.Instance.highScores[startIndex].playerName);
+
+        // Ensure the list does not exceed 10 items
+        if (GameManager.Instance.highScores.Count > 10)
+        {
+            GameManager.Instance.highScores.RemoveAt(10);
+        }        
     }
 }
